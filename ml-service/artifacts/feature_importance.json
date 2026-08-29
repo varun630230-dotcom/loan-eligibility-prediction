@@ -1,0 +1,150 @@
+[
+    {
+        "feature": "Credit_History",
+        "importance": 0.21896997094154358
+    },
+    {
+        "feature": "DTI_Ratio",
+        "importance": 0.11911188811063766
+    },
+    {
+        "feature": "CreditScore",
+        "importance": 0.07165524363517761
+    },
+    {
+        "feature": "LTV_Ratio",
+        "importance": 0.05765015631914139
+    },
+    {
+        "feature": "DisposableIncome",
+        "importance": 0.05147714912891388
+    },
+    {
+        "feature": "AssetCoverageRatio",
+        "importance": 0.03697015345096588
+    },
+    {
+        "feature": "ActiveLoansCount",
+        "importance": 0.034298308193683624
+    },
+    {
+        "feature": "WorkExperienceYears",
+        "importance": 0.02426174469292164
+    },
+    {
+        "feature": "Dependents_3+",
+        "importance": 0.02028474397957325
+    },
+    {
+        "feature": "Dependents_2",
+        "importance": 0.018923040479421616
+    },
+    {
+        "feature": "LoanAmount_log",
+        "importance": 0.01792885921895504
+    },
+    {
+        "feature": "Education_Post_Graduate",
+        "importance": 0.016790421679615974
+    },
+    {
+        "feature": "EmploymentType_Professional",
+        "importance": 0.016502685844898224
+    },
+    {
+        "feature": "LoanPurpose_Personal",
+        "importance": 0.016144433990120888
+    },
+    {
+        "feature": "EstimatedNewEMI",
+        "importance": 0.015121803618967533
+    },
+    {
+        "feature": "PropertyValue_log",
+        "importance": 0.01509139034897089
+    },
+    {
+        "feature": "LoanPurpose_Debt_Consolidation",
+        "importance": 0.014779086224734783
+    },
+    {
+        "feature": "TotalAssetValue_log",
+        "importance": 0.014707746915519238
+    },
+    {
+        "feature": "TotalIncome_log",
+        "importance": 0.014225577004253864
+    },
+    {
+        "feature": "Property_Area_Rural",
+        "importance": 0.013810106553137302
+    },
+    {
+        "feature": "ExistingMonthlyDebt",
+        "importance": 0.013549470342695713
+    },
+    {
+        "feature": "Property_Area_Semiurban",
+        "importance": 0.013547866605222225
+    },
+    {
+        "feature": "EmploymentType_Self_Employed",
+        "importance": 0.013520211912691593
+    },
+    {
+        "feature": "LoanPurpose_Home",
+        "importance": 0.013358986005187035
+    },
+    {
+        "feature": "EmploymentType_Salaried",
+        "importance": 0.013301951810717583
+    },
+    {
+        "feature": "Education_Under_Graduate",
+        "importance": 0.013238695450127125
+    },
+    {
+        "feature": "LoanPurpose_Business",
+        "importance": 0.013238230720162392
+    },
+    {
+        "feature": "ApplicantIncome_log",
+        "importance": 0.012606717646121979
+    },
+    {
+        "feature": "Property_Area_Urban",
+        "importance": 0.01257755421102047
+    },
+    {
+        "feature": "Loan_Amount_Term",
+        "importance": 0.012368671596050262
+    },
+    {
+        "feature": "Dependents_1",
+        "importance": 0.011661929078400135
+    },
+    {
+        "feature": "Married",
+        "importance": 0.010751902125775814
+    },
+    {
+        "feature": "EmploymentType_Business_Owner",
+        "importance": 0.010689752176404
+    },
+    {
+        "feature": "Education_Graduate",
+        "importance": 0.010502004064619541
+    },
+    {
+        "feature": "Dependents_0",
+        "importance": 0.009738493710756302
+    },
+    {
+        "feature": "Education_High_School",
+        "importance": 0.00664305966347456
+    },
+    {
+        "feature": "LoanPurpose_Education",
+        "importance": 0.0
+    }
+]

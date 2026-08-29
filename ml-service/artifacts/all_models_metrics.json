@@ -1,0 +1,57 @@
+{
+    "LogisticRegression": {
+        "cv_accuracy_mean": 0.9127083333333333,
+        "cv_accuracy_std": 0.004289845892077909,
+        "cv_f1_mean": 0.9373956897866679,
+        "cv_f1_std": 0.003105106466290849,
+        "test_accuracy": 0.9141666666666667,
+        "test_f1": 0.9387997623291741,
+        "test_precision": 0.9228971962616822,
+        "test_recall": 0.9552599758162031,
+        "test_roc_auc": 0.9727689150681912
+    },
+    "DecisionTree": {
+        "cv_accuracy_mean": 0.9141666666666668,
+        "cv_accuracy_std": 0.00882900837517378,
+        "cv_f1_mean": 0.9386837942088583,
+        "cv_f1_std": 0.0062084417754927615,
+        "test_accuracy": 0.9383333333333334,
+        "test_f1": 0.9561091340450771,
+        "test_precision": 0.9383003492433062,
+        "test_recall": 0.9746070133010882,
+        "test_roc_auc": 0.9536244898223821
+    },
+    "RandomForest": {
+        "cv_accuracy_mean": 0.929375,
+        "cv_accuracy_std": 0.009395810236483072,
+        "cv_f1_mean": 0.9491386674931395,
+        "cv_f1_std": 0.00684885500736792,
+        "test_accuracy": 0.9366666666666666,
+        "test_f1": 0.9549228944246738,
+        "test_precision": 0.9371362048894063,
+        "test_recall": 0.973397823458283,
+        "test_roc_auc": 0.982619111683108
+    },
+    "GradientBoosting": {
+        "cv_accuracy_mean": 0.940625,
+        "cv_accuracy_std": 0.008202091535428965,
+        "cv_f1_mean": 0.9571896829205626,
+        "cv_f1_std": 0.005897616104496148,
+        "test_accuracy": 0.9558333333333333,
+        "test_f1": 0.9685459940652819,
+        "test_precision": 0.951048951048951,
+        "test_recall": 0.9866989117291415,
+        "test_roc_auc": 0.9916491339542453
+    },
+    "XGBoost": {
+        "cv_accuracy_mean": 0.9383333333333332,
+        "cv_accuracy_std": 0.010043308994328292,
+        "cv_f1_mean": 0.9554207014742502,
+        "cv_f1_std": 0.007304053448676658,
+        "test_accuracy": 0.9508333333333333,
+        "test_f1": 0.9648181276088252,
+        "test_precision": 0.951764705882353,
+        "test_recall": 0.9782345828295043,
+        "test_roc_auc": 0.991221216905317
+    }
+}

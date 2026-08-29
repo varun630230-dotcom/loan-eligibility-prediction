@@ -1,0 +1,13 @@
+{
+    "name": "XGBoost_Tuned",
+    "params": {
+        "subsample": 0.6,
+        "n_estimators": 300.0,
+        "min_child_weight": 5.0,
+        "max_depth": 3.0,
+        "learning_rate": 0.1,
+        "colsample_bytree": 0.8
+    },
+    "date": "2026-08-23T20:16:58.036047",
+    "version": "1.0"
+}
