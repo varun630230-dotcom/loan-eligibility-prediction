@@ -1,13 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LoanWise - Loan Eligibility Prediction</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Eligibility Prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#predict" class="brand">Loan Eligibility Prediction</a>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#predict">Predict</a>
+        <a href="#performance">Model Performance</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Prediction Form & Results -->
+    <section id="predict" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Eligibility Assessment</h2>
+            <p>Enter applicant financial, collateral, and credit details to run prediction.</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="reset-form">Reset</button>
+        </div>
+
+        <form id="prediction-form" class="card form-card" novalidate>
+          <div class="form-section">
+            <h3 class="form-section-title">1. Income &amp; Obligations</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="ApplicantIncome">Applicant Monthly Income ($) <span class="req">*</span></label>
+                <input type="number" id="ApplicantIncome" name="ApplicantIncome" min="1" step="100" value="6000" required />
+                <span class="error-msg" data-error-for="ApplicantIncome"></span>
+              </div>
+
+              <div class="field">
+                <label for="CoapplicantIncome">Co-Applicant Monthly Income ($)</label>
+                <input type="number" id="CoapplicantIncome" name="CoapplicantIncome" min="0" step="100" value="1500" />
+                <span class="error-msg" data-error-for="CoapplicantIncome"></span>
+              </div>
+
+              <div class="field">
+                <label for="ExistingMonthlyDebt">Existing Monthly Debt ($)</label>
+                <input type="number" id="ExistingMonthlyDebt" name="ExistingMonthlyDebt" min="0" step="50" value="500" />
+                <span class="error-msg" data-error-for="ExistingMonthlyDebt"></span>
+              </div>
+
+              <div class="field">
+                <label for="TotalAssetValue">Total Liquid Assets ($)</label>
+                <input type="number" id="TotalAssetValue" name="TotalAssetValue" min="0" step="1000" value="80000" />
+                <span class="error-msg" data-error-for="TotalAssetValue"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">2. Loan &amp; Collateral</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="LoanAmount">Requested Loan Amount ($) <span class="req">*</span></label>
+                <input type="number" id="LoanAmount" name="LoanAmount" min="1000" step="1000" value="200000" required />
+                <span class="error-msg" data-error-for="LoanAmount"></span>
+              </div>
+
+              <div class="field">
+                <label for="Loan_Amount_Term">Loan Term (Months) <span class="req">*</span></label>
+                <select id="Loan_Amount_Term" name="Loan_Amount_Term" required>
+                  <option value="12">12 Months</option>
+                  <option value="24">24 Months</option>
+                  <option value="36">36 Months</option>
+                  <option value="60">60 Months</option>
+                  <option value="120">120 Months</option>
+                  <option value="180">180 Months</option>
+                  <option value="240">240 Months</option>
+                  <option value="360" selected>360 Months</option>
+                  <option value="480">480 Months</option>
+                </select>
+                <span class="error-msg" data-error-for="Loan_Amount_Term"></span>
+              </div>
+
+              <div class="field">
+                <label for="LoanPurpose">Loan Purpose <span class="req">*</span></label>
+                <select id="LoanPurpose" name="LoanPurpose" required>
+                  <option value="Home" selected>Home</option>
+                  <option value="Debt_Consolidation">Debt Consolidation</option>
+                  <option value="Business">Business</option>
+                  <option value="Education">Education</option>
+                  <option value="Personal">Personal</option>
+                </select>
+                <span class="error-msg" data-error-for="LoanPurpose"></span>
+              </div>
+
+              <div class="field">
+                <label for="PropertyValue">Property / Collateral Value ($) <span class="req">*</span></label>
+                <input type="number" id="PropertyValue" name="PropertyValue" min="1000" step="1000" value="280000" required />
+                <span class="error-msg" data-error-for="PropertyValue"></span>
+              </div>
+
+              <div class="field field-wide">
+                <span class="label-text">Property Area <span class="req">*</span></span>
+                <div class="radio-group" role="radiogroup" aria-label="Property Area">
+                  <label class="radio-pill"><input type="radio" name="Property_Area" value="Urban" checked /><span>Urban</span></label>
+                  <label class="radio-pill"><input type="radio" name="Property_Area" value="Semiurban" /><span>Semiurban</span></label>
+                  <label class="radio-pill"><input type="radio" name="Property_Area" value="Rural" /><span>Rural</span></label>
+                </div>
+                <span class="error-msg" data-error-for="Property_Area"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">3. Credit Profile</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="CreditScore">Credit Score (300 - 850) <span class="req">*</span></label>
+                <input type="number" id="CreditScore" name="CreditScore" min="300" max="850" step="1" value="740" required />
+                <span class="error-msg" data-error-for="CreditScore"></span>
+              </div>
+
+              <div class="field">
+                <label for="ActiveLoansCount">Active Open Loans <span class="req">*</span></label>
+                <input type="number" id="ActiveLoansCount" name="ActiveLoansCount" min="0" max="20" step="1" value="1" required />
+                <span class="error-msg" data-error-for="ActiveLoansCount"></span>
+              </div>
+
+              <div class="field field-wide">
+                <span class="label-text">Past Credit History <span class="req">*</span></span>
+                <div class="radio-group" role="radiogroup" aria-label="Credit History">
+                  <label class="radio-pill"><input type="radio" name="Credit_History" value="1.0" checked /><span>Good Repayment History (No Defaults)</span></label>
+                  <label class="radio-pill"><input type="radio" name="Credit_History" value="0.0" /><span>Past Delinquencies / Defaults</span></label>
+                </div>
+                <span class="error-msg" data-error-for="Credit_History"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">4. Employment &amp; Applicant Details</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="EmploymentType">Employment Type <span class="req">*</span></label>
+                <select id="EmploymentType" name="EmploymentType" required>
+                  <option value="Salaried" selected>Salaried</option>
+                  <option value="Self_Employed">Self-Employed</option>
+                  <option value="Business_Owner">Business Owner</option>
+                  <option value="Professional">Professional</option>
+                </select>
+                <span class="error-msg" data-error-for="EmploymentType"></span>
+              </div>
+
+              <div class="field">
+                <label for="WorkExperienceYears">Work Experience (Years) <span class="req">*</span></label>
+                <input type="number" id="WorkExperienceYears" name="WorkExperienceYears" min="0" max="60" step="1" value="5" required />
+                <span class="error-msg" data-error-for="WorkExperienceYears"></span>
+              </div>
+
+              <div class="field">
+                <label for="Education">Education Level <span class="req">*</span></label>
+                <select id="Education" name="Education" required>
+                  <option value="Post_Graduate">Post-Graduate</option>
+                  <option value="Graduate" selected>Graduate</option>
+                  <option value="Under_Graduate">Undergraduate</option>
+                  <option value="High_School">High School</option>
+                </select>
+                <span class="error-msg" data-error-for="Education"></span>
+              </div>
+
+              <div class="field">
+                <span class="label-text">Marital Status <span class="req">*</span></span>
+                <div class="radio-group" role="radiogroup" aria-label="Marital Status">
+                  <label class="radio-pill"><input type="radio" name="Married" value="Yes" checked /><span>Married</span></label>
+                  <label class="radio-pill"><input type="radio" name="Married" value="No" /><span>Unmarried</span></label>
+                </div>
+                <span class="error-msg" data-error-for="Married"></span>
+              </div>
+
+              <div class="field field-wide">
+                <span class="label-text">Dependents <span class="req">*</span></span>
+                <div class="radio-group" role="radiogroup" aria-label="Dependents">
+                  <label class="radio-pill"><input type="radio" name="Dependents" value="0" checked /><span>0</span></label>
+                  <label class="radio-pill"><input type="radio" name="Dependents" value="1" /><span>1</span></label>
+                  <label class="radio-pill"><input type="radio" name="Dependents" value="2" /><span>2</span></label>
+                  <label class="radio-pill"><input type="radio" name="Dependents" value="3+" /><span>3+</span></label>
+                </div>
+                <span class="error-msg" data-error-for="Dependents"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <div class="form-alert" id="form-error-banner" hidden></div>
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">Predict Loan Eligibility</button>
+          </div>
+        </form>
+
+        <div id="result-panel" class="card result-card" hidden aria-live="polite">
+          <div class="result-top">
+            <div>
+              <span class="result-eyebrow">Prediction Result</span>
+              <div class="result-status-row">
+                <span id="result-badge" class="status-badge">Eligible</span>
+                <span id="result-model" class="model-tag">Model: XGBoost_Tuned</span>
+              </div>
+            </div>
+            <div class="probability-box">
+              <span class="prob-label">Approval Probability</span>
+              <span id="result-probability" class="prob-value">0.00%</span>
+            </div>
+          </div>
+
+          <div class="prob-bar-track" aria-hidden="true">
+            <div id="result-prob-bar" class="prob-bar-fill"></div>
+          </div>
+
+          <p id="result-explanation" class="result-explanation"></p>
+
+          <div class="ratios-grid">
+            <div class="ratio-card">
+              <span class="ratio-label">Debt-to-Income (DTI)</span>
+              <span id="ratio-dti" class="ratio-value">—</span>
+            </div>
+            <div class="ratio-card">
+              <span class="ratio-label">Loan-to-Value (LTV)</span>
+              <span id="ratio-ltv" class="ratio-value">—</span>
+            </div>
+            <div class="ratio-card">
+              <span class="ratio-label">Estimated Monthly EMI</span>
+              <span id="ratio-emi" class="ratio-value">—</span>
+            </div>
+            <div class="ratio-card">
+              <span class="ratio-label">Net Disposable Income</span>
+              <span id="ratio-disposable" class="ratio-value">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model Performance Section -->
+    <section id="performance" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Model Performance Comparison</h2>
+            <p>Evaluation metrics across all five algorithms on the 1,200-record test set.</p>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="card-head">
+            <h3>Algorithm Comparison (%)</h3>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="metrics-chart" aria-label="Model performance comparison bar chart"></canvas>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <div class="table-scroll">
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Algorithm</th>
+                  <th>Accuracy</th>
+                  <th>Precision</th>
+                  <th>Recall</th>
+                  <th>F1-Score</th>
+                  <th>ROC-AUC</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="metrics-table-body">
+                <tr><td colspan="7" class="loading-cell">Loading metrics...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
 </html>
